@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>Kugel's AstroLib</title>
+<meta name="description" content="zodiac astro-chart Java lib library free" />
+<meta name="keywords" content="zodiac,astro,chart,lib,library,Java,source,free,code" />
+<meta name="author" content="Peter Kofler" />
+<meta http-equiv="Content-Type" content="text/html" />
+<style type="text/css">
+<!--
+   .kword {font-weight:bold; color:#7f0055;}
+   .char {color:#2a00ff; }
+   .strng {color:#2a00ff; }
+   .com {color:#3f7f5f; }
+   .comm {color:#3f5fbf; }
+   .doc {color:#3f5fbf; }
+-->
+</style>
+</head>
+<body>
+
+<!-- CONTENT -->
+<h2>AstroLib (Java library for astro charting calculations)</h2>
+
+<h3><a name="summary">Summary</a></h3>
+<p><b>AstroLib</b> is a Java library for astro charting calculations. There are house
+system and planet position calculation methods together with date/time and location
+conversion routines. For a given time the positions of the planets in the zodiac
+are calculated.
+It is based on my <a href="http://kofler.dot.at/astro/">Zodiac Watch</a>, an astro-chart real-time
+watch applet. After putting the applet on my homepage, I got a lot of requests
+regarding its Java source. So I removed all painting and user interface routines to
+create a library.</p>
+
+<p>Note that there is no code for graphical representations or drawing a chart. The
+library contains just methods for calculating the data needed to build a chart.
+Some methods were simply taken from
+<a class="e" href="http://www.astrolog.org/astrolog.htm">Astrolog</a> and converted to
+Java. Part of the code is commented in German, but the variables' and methods' names
+are all English.</p>
+
+
+<!-- Download -->
+
+
+<h3><a name="install">Installation</a></h3>
+<p>To install <b>AstroLib</b>, simply extract the astrolib-*.zip and add astrolib.jar
+to your classpath. <b>AstroLib</b> is JDK 1.1 compliant and does not depend on any other
+libraries.</p>
+
+
+<h3><a name="use">Usage</a></h3>
+
+<p>The library is used as shown in the <code>Demo</code> class' <code>main</code> method:</p>
+<pre>
+   <span class="com">// get a horoscop instance</span>
+   <span class="kword">final</span> TextHoroscop horoscop = <span class="kword">new</span> TextHoroscop();
+   <span class="com">// set your desired planet position calculation algorithm</span>
+   horoscop.setPlanet(<span class="kword">new</span> PlanetAA0());
+   <span class="com">// set your desired house system calculation algorithm</span>
+   <span class="com">// may be anything from the at.kugel.zodiac.house package.</span>
+   horoscop.setHouse(<span class="kword">new</span> HousePlacidus());
+   <span class="com">// set your user data time value</span>
+   horoscop.setTime(1, 12, 1953, 20);
+   <span class="com">// set your user data location value</span>
+   horoscop.setLocationDegree(-16 - 17.0 / 60, 48 + 4.0 / 60);
+   <span class="com">// calculate the values</span>
+   horoscop.calcValues();
+   <span class="com">// do something with the data or output raw data</span>
+   System.out.println(horoscop.toString());
+</pre>
+
+<h4><a name="packages">Packages</a></h4>
+
+<p>In case you want to add or change something, there are the following packages:</p>
+<ul>
+<li><code>at.kugel.zodiac.util</code> contains some independent calculation utility
+    functions and classes.</li>
+<li><code>at.kugel.zodiac.planet</code> contains the different planet position
+    calculation algorithms. This package is only dependent on the util package.
+    All planet position algorithms are subclasses of <code>PlanetBasic</code>
+    which itself implements <code>PlanetInt</code>. New and more accurate
+    planet position algorithms must implement <code>PlanetInt</code> and
+    may wish to extend <code>PlanetBasic</code> to inherit common
+    functionality, but are not forced to do so. There is only <code>PlanetAA0</code>
+    available at the moment, which is not very accurate.</li>
+<li><code>at.kugel.zodiac.house</code> contains the different house systems.
+    All house system calculation algorithms are subclasses of <code>HouseBasic</code>
+    which itself implements <code>HouseInt</code>.</li>
+<li><code>at.kugel.zodiac</code> is the main package and contains the
+    <code>TextHoroscop</code> class, which uses the house house system and planet
+    calculation classes to calculate the astro-chart data.</li>
+<li><code>test</code> contains just debug stuff.</li>
+</ul>
+
+<h4><a name="licencse">License Agreement</a></h4>
+<p><b>AstroLib</b> is Open Source under the
+<a class="e" href="http://www.gnu.org/licenses/gpl.html">GPL</a>
+license.</p>
+
+
+<h3><a name="version">Version History</a></h3>
+<ul>
+<li><b>1.01</b> (19.05.2000) - first release of the applet</li>
+<li><b>1.02</b> (25.06.2000) - some internal extensions added</li>
+<li><b>1.03</b> (22.07.2000) - several bug-fixes for different browsers</li>
+<li><b>1.10</b> (06.07.2002) - bug-fixes for Macintosh and Linux, download time reduced to 60%</li>
+<li><b>1.11</b> (21.07.2003) - created <b>AstroLib</b> as branch from <b>Zodiac Watch</b> applet's source</li>
+<li><b>1.12</b> (26.08.2004) - translated some comments, removed unused methods, added Demo class</li>
+<li><b>1.13</b> (19.11.2005) - fixed a bug using time zones (thanks to Rastislav Szabo)</li>
+</ul>
+<!-- CONTENT END -->
+
+</body>
+</html>
